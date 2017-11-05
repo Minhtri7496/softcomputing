@@ -41,3 +41,13 @@ C:\Users\Tri\Dropbox\soft computing\GA A\MakeLand_SV\MakeLand\obj\Debug\MakeLand
 C:\Users\Tri\Dropbox\soft computing\GA A\MakeLand_SV\MakeLand\obj\Debug\MakeLand.Form2.resources
 C:\Users\Tri\Dropbox\soft computing\GA A\MakeLand_SV\MakeLand\obj\Debug\MakeLand.Properties.Resources.resources
 C:\Users\Tri\Dropbox\soft computing\GA A\MakeLand_SV\MakeLand\obj\Debug\MakeLand.csproj.GenerateResource.Cache
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\bin\Debug\MakeLand.exe.config
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\obj\Debug\MakeLand.exe
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\obj\Debug\MakeLand.pdb
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\bin\Debug\MakeLand.exe
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\bin\Debug\MakeLand.pdb
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\obj\Debug\MakeLand.csprojResolveAssemblyReference.cache
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\obj\Debug\MakeLand.Form1.resources
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\obj\Debug\MakeLand.Form2.resources
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\obj\Debug\MakeLand.Properties.Resources.resources
+H:\ProjectAndAssignment\softcomputing\MakeLand_SV\MakeLand\obj\Debug\MakeLand.csproj.GenerateResource.Cache

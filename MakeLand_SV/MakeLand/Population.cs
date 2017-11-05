@@ -194,6 +194,7 @@ namespace MakeLand
             if (mut100 < mutatecase1 + mutatecase2 + mutatecase3+mutatecase4) { mutateType = 4; }
             switch (mutateType)
             {
+
                 //create a random gene
                 case 1:
                     int t = r.Next(0, Params.genotypeSize);
@@ -202,10 +203,10 @@ namespace MakeLand
                         int i = r.Next(0, Params.genotypeSize);
                         g.genes[i] = new Gene(r);
                     }
-
                     G.mutationCount++;
                     mutatecase1++;
                     break;
+
                 //swap 2 random genes
                 case 2:
                     int ii = r.Next(0, Params.genotypeSize);
@@ -216,6 +217,7 @@ namespace MakeLand
                     G.mutationCount++;
                     mutatecase2++;
                     break;
+
                 //change 1 terrain to another terrain
                 case 3:
                     int w = r.Next(0, Params.genotypeSize);
@@ -238,6 +240,7 @@ namespace MakeLand
                     G.mutationCount++;
                     mutatecase3++;
                     break;
+
                 //check the area of the genes
                 case 4:
                     int land = r.Next(40, Params.dimY - 20);
@@ -245,10 +248,8 @@ namespace MakeLand
                     int outlandy = r.Next(Params.dimY - 20, Params.dimY);
                                 int q = r.Next(0, Params.genotypeSize);
                                 for (int jj = 0; jj < q; jj++)
-                                {
-                                    
+                                {                                   
                                     int i = r.Next(0, Params.genotypeSize);
-
                             //check the miidle area to find out if gene is water, if it is, then move it out of the middle area        
                             if ((g.genes[i].x < Params.dimX - 20 && g.genes[i].x > 20)&&(g.genes[i].y < Params.dimY - 20 && g.genes[i].y > 20))
                             {
@@ -257,7 +258,7 @@ namespace MakeLand
                                 g.genes[i].x = outlandx;
                                 g.genes[i].y = outlandy;
                             }
-                                    }
+                            }
                             //check the genes around the middle area, then check their terrain, if it is 0 then move it in the middle and turn it into 1,
                             // if terrain is 1 then move it in the middle, if terrain is 2 then move it in the middle
                             if((((g.genes[i].x > Params.dimX - 20)||(g.genes[i].x < 20)) && (g.genes[i].y > Params.dimY-20)))
@@ -533,20 +534,16 @@ namespace MakeLand
         /// </summary>
         /// <returns></returns>
         public int setScore()
-        {
-            
+        {          
             score = 0;
             int every = 1;
             seaCount = 0;
             landCount = 0;
             freshCount = 0;
             totalCount = 0;
-
             Random r = new Random();
             int rnd = 0;
             rnd = r.Next(1, 300);
-
-
 
             for (int x = 0; x < Params.dimX; x = x + every)
             {
@@ -560,217 +557,83 @@ namespace MakeLand
                     if (getTerrainSafe(x, y) == 2)
                     { freshCount++; }
 
-                    int gap = 7;
+                    int gap = 15;
                     //check if sea is near the edge
                     if ((x < Params.dimX && y < gap) || (x < Params.dimX && y > Params.dimY - gap))
                          {
-                        if (getTerrainSafe(x, y) == 2)
-                        {
-                            score--;
-                        }
-                        if (getTerrainSafe(x, y) == 0)
-                        {
-                            score++;
-                        }
-                        if (getTerrainSafe(x, y) == 1)
-                        {
-                            score--;
-                        }
-
-                    }
-                    
+                        if (getTerrainSafe(x, y) == 2) { score--; }
+                        if (getTerrainSafe(x, y) == 0) { score++; }
+                        if (getTerrainSafe(x, y) == 1) { score--; }
+                    }                    
                     else if((y < Params.dimY && x < gap) || (y < Params.dimY && x > Params.dimX - gap))
                     {
-                        if (getTerrainSafe(x, y) == 2)
-                        {
-                            score--;
-                        }
-                        if (getTerrainSafe(x, y) == 0)
-                        {
-                            score++;
-                        }
-                        if (getTerrainSafe(x, y) == 1)
-                        {
-                            score--;
-                        }
-
+                        if (getTerrainSafe(x, y) == 2) { score--; }
+                        if (getTerrainSafe(x, y) == 0) { score++; }
+                        if (getTerrainSafe(x, y) == 1) { score--; }
                     }
-                        else{
+
+                    else {
+
                         //check if land and freshwater are in the middle
+
                         if ((y < Params.dimY && x > gap) || (y < Params.dimY && x < Params.dimX - gap))
                         {
-                            if (getTerrainSafe(x, y) == 2)
-                            {
-                                score++;
-                            }
-                            if (getTerrainSafe(x, y) == 0)
-                            {
-                                score--;
-                            }
-                            if (getTerrainSafe(x, y) == 1)
-                            {
-                                score++;
-                            }
-
+                            if (getTerrainSafe(x, y) == 2) { score++; }
+                            if (getTerrainSafe(x, y) == 0) { score--; }
+                            if (getTerrainSafe(x, y) == 1) { score++; }
                         }
                         if ((x < Params.dimX && y > gap) || (y < Params.dimX && y < Params.dimX - gap))
                         {
-                            if (getTerrainSafe(x, y) == 2)
-                            {
-                                score++;
-                            }
-                            if (getTerrainSafe(x, y) == 0)
-                            {
-                                score--;
-                            }
-                            if (getTerrainSafe(x, y) == 1)
-                            {
-                                score++;
-                            }
-
+                            if (getTerrainSafe(x, y) == 2) { score++; }
+                            if (getTerrainSafe(x, y) == 0) { score--; }
+                            if (getTerrainSafe(x, y) == 1) { score++; }
                         }
                         
                         //if cell is land     
                         if (getTerrainSafe(x, y) == 1)
                             {
+
                                 //checking if land ratio is > 70%
                                 if (landCount / totalCount < Params.percentLand)
                                 {
                                     //surround by land
-                                    if (getTerrainSafe(x - 1, y - 1) == 1)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y - 1) == 1)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y - 1) == 1)
-                                    {
-                                        score++;
-
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y) == 1)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y) == 1)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y + 1) == 1)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y + 1) == 1)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y + 1) == 1)
-                                    {
-                                        score++;
-
-                                    }
+                                if (getTerrainSafe(x - 1, y - 1) == 1) { score++; }
+                                if (getTerrainSafe(x, y - 1) == 1) { score++; }
+                                if (getTerrainSafe(x + 1, y - 1) == 1) { score++; }
+                                if (getTerrainSafe(x - 1, y) == 1){ score++; }
+                                if (getTerrainSafe(x + 1, y) == 1) { score++; }
+                                if (getTerrainSafe(x - 1, y + 1) == 1) { score++; }
+                                if (getTerrainSafe(x, y + 1) == 1) { score++; }
+                                if (getTerrainSafe(x + 1, y + 1) == 1) { score++; }
                                 }
+
                                 //check if land ratio < 70%
                                 if (landCount / totalCount > Params.percentLand)
                                 {
                                     //surround by water
-                                    if (getTerrainSafe(x - 1, y - 1) == 0)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x, y - 1) == 0)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y - 1) == 0)
-                                    {
-
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y) == 0)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y) == 0)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y + 1) == 0)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x, y + 1) == 0)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y + 1) == 0)
-                                    {
-                                        score--;
-
-                                    }
+                                if (getTerrainSafe(x - 1, y - 1) == 0) { score--; }
+                                if (getTerrainSafe(x, y - 1) == 0) { score--; }
+                                if (getTerrainSafe(x + 1, y - 1) == 0) { score--; }
+                                if (getTerrainSafe(x - 1, y) == 0) { score--; }
+                                if (getTerrainSafe(x + 1, y) == 0) { score--; }
+                                if (getTerrainSafe(x - 1, y + 1) == 0) { score--; }
+                                if (getTerrainSafe(x, y + 1) == 0) { score--; }
+                                if (getTerrainSafe(x + 1, y + 1) == 0) { score--; }
                                 }
 
+                                //check if sea >26%
                                 if (seaCount / totalCount > 1 - (Params.percentFresh + Params.percentLand))
                                 {
                                     //surround by freshwater
-                                    if (getTerrainSafe(x - 1, y - 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y - 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y - 1) == 2)
-                                    {
-
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y + 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y + 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y + 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                }
+                                if (getTerrainSafe(x - 1, y - 1) == 2) { score++; }
+                                if (getTerrainSafe(x, y - 1) == 2) { score++; }
+                                if (getTerrainSafe(x + 1, y - 1) == 2) { score++; }
+                                if (getTerrainSafe(x - 1, y) == 2) { score++; }
+                                if (getTerrainSafe(x + 1, y) == 2) { score++; }
+                                if (getTerrainSafe(x - 1, y + 1) == 2) { score++; }
+                                if (getTerrainSafe(x, y + 1) == 2) { score++; }
+                                if (getTerrainSafe(x + 1, y + 1) == 2) { score++; }
+                            }
                             }
                             //cell is water
                             if (getTerrainSafe(x, y) == 0)
@@ -780,249 +643,94 @@ namespace MakeLand
                                 if (seaCount / totalCount < (1 - (Params.percentFresh + Params.percentLand)))
                                 //surround by water
                                 {
-                                    if (getTerrainSafe(x - 1, y - 1) == 0)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y - 1) == 0)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y - 1) == 0)
-                                    {
-
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y) == 0)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y) == 0)
-                                    {
-                                        score++;
-                                    }
-                                    if (getTerrainSafe(x - 1, y + 1) == 0)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y + 1) == 0)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y + 1) == 0)
-                                    {
-                                        score++;
-
-                                    }
-                                }
+                                if (getTerrainSafe(x - 1, y - 1) == 0) { score++; }
+                                if (getTerrainSafe(x, y - 1) == 0) { score++; }
+                                if (getTerrainSafe(x + 1, y - 1) == 0) { score++; }
+                                if (getTerrainSafe(x - 1, y) == 0) { score++; }
+                                if (getTerrainSafe(x + 1, y) == 0) { score++; }
+                                if (getTerrainSafe(x - 1, y + 1) == 0) { score++; }
+                                if (getTerrainSafe(x, y + 1) == 0) { score++; }
+                                if (getTerrainSafe(x + 1, y + 1) == 0) { score++; }
+                            }
+                                //check if sea > 26%
                             if (seaCount / totalCount > (1 - (Params.percentFresh + Params.percentLand)))
                             {
                                 //surround by freshwater
-                                if (getTerrainSafe(x - 1, y - 1) == 2)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x, y - 1) == 2)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x + 1, y - 1) == 2)
-                                {
-
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x - 1, y) == 2)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x + 1, y) == 2)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x - 1, y + 1) == 2)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x, y + 1) == 2)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x + 1, y + 1) == 2)
-                                {
-                                    score--;
-
-                                }
+                                if (getTerrainSafe(x - 1, y - 1) == 2) { score--; }
+                                if (getTerrainSafe(x, y - 1) == 2) { score--; }
+                                if (getTerrainSafe(x + 1, y - 1) == 2) { score--; }
+                                if (getTerrainSafe(x - 1, y) == 2) { score--; }
+                                if (getTerrainSafe(x + 1, y) == 2) { score--; }
+                                if (getTerrainSafe(x - 1, y + 1) == 2) { score--; }
+                                if (getTerrainSafe(x, y + 1) == 2) { score--; }
+                                if (getTerrainSafe(x + 1, y + 1) == 2) { score--; }
                             }
+
                             //check if land ratio is less than 70%
                             if (landCount / totalCount < Params.percentLand)
-                                {
+                            {
                                     //surround by land
-                                    if (getTerrainSafe(x - 1, y - 1) == 1)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x, y - 1) == 1)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y - 1) == 1)
-                                    {
-
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y) == 1)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y) == 1)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y + 1) == 1)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x, y + 1) == 1)
-                                    {
-                                        score--;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y + 1) == 1)
-                                    {
-                                        score--;
-
-                                    }
-                                }
+                                if (getTerrainSafe(x - 1, y - 1) == 1) { score--; }
+                                if (getTerrainSafe(x, y - 1) == 1) { score--; }
+                                if (getTerrainSafe(x + 1, y - 1) == 1) { score--; }
+                                if (getTerrainSafe(x - 1, y) == 1) { score--; }
+                                if (getTerrainSafe(x + 1, y) == 1) { score--; }
+                                if (getTerrainSafe(x - 1, y + 1) == 1) { score--; }
+                                if (getTerrainSafe(x, y + 1) == 1) { score--; }
+                                if (getTerrainSafe(x + 1, y + 1) == 1) { score--; }
                             }
+
+                        }
                             //cell is fresh water
                             if (getTerrainSafe(x, y) == 2)
                             {
+
+                            //check if land ratio is less than 70%
+                            if (landCount / totalCount < Params.percentLand)
+                            {
+                                //surround by land
+                                if (getTerrainSafe(x - 1, y - 1) == 1) { score++; }
+                                if (getTerrainSafe(x, y - 1) == 1) { score++; }
+                                if (getTerrainSafe(x + 1, y - 1) == 1) { score++; }
+                                if (getTerrainSafe(x - 1, y) == 1) { score++; }
+                                if (getTerrainSafe(x + 1, y) == 1) { score++; }
+                                if (getTerrainSafe(x - 1, y + 1) == 1) { score++; }
+                                if (getTerrainSafe(x, y + 1) == 1) { score++; }
+                                if (getTerrainSafe(x + 1, y + 1) == 1) { score++; }
+                            }
+
                             //check if water ratio is less than 26%
                             if (freshCount / totalCount > Params.percentFresh)
                             //surround by water
                             {
-                                if (getTerrainSafe(x - 1, y - 1) == 0)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x, y - 1) == 0)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x + 1, y - 1) == 0)
-                                {
-
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x - 1, y) == 0)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x + 1, y) == 0)
-                                {
-                                    score--;
-                                }
-                                if (getTerrainSafe(x - 1, y + 1) == 0)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x, y + 1) == 0)
-                                {
-                                    score--;
-
-                                }
-                                if (getTerrainSafe(x + 1, y + 1) == 0)
-                                {
-                                    score--;
-
-                                }
+                                if (getTerrainSafe(x - 1, y - 1) == 0) { score--; }
+                                if (getTerrainSafe(x, y - 1) == 0) { score--; }
+                                if (getTerrainSafe(x + 1, y - 1) == 0) { score--; }
+                                if (getTerrainSafe(x - 1, y) == 0) { score--; }
+                                if (getTerrainSafe(x + 1, y) == 0) { score--; }
+                                if (getTerrainSafe(x - 1, y + 1) == 0) { score--; }
+                                if (getTerrainSafe(x, y + 1) == 0) { score--; }
+                                if (getTerrainSafe(x + 1, y + 1) == 0) {score--;}
                             }
 
                             //check if the freshwater ratio is more than 4%
                             if (freshCount / totalCount < Params.percentFresh)
                                 {
                                     //surround by freshwater
-                                    if (getTerrainSafe(x - 1, y - 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y - 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y - 1) == 2)
-                                    {
-
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x - 1, y + 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x, y + 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                    if (getTerrainSafe(x + 1, y + 1) == 2)
-                                    {
-                                        score++;
-
-                                    }
-                                }
-
-                                
+                                if (getTerrainSafe(x - 1, y - 1) == 2) { score++; }
+                                if (getTerrainSafe(x, y - 1) == 2) { score++; }
+                                if (getTerrainSafe(x + 1, y - 1) == 2) { score++; }
+                                if (getTerrainSafe(x - 1, y) == 2) { score++; }
+                                if (getTerrainSafe(x + 1, y) == 2) { score++; }
+                                if (getTerrainSafe(x - 1, y + 1) == 2) { score++; }
+                                if (getTerrainSafe(x, y + 1) == 2) { score++; }
+                                if (getTerrainSafe(x + 1, y + 1) == 2) { score++; }
                             }
                         }
-
-
+                    }
                     totalCount = landCount + freshCount + seaCount;
-
-
-
                 }
-                
-
-            }
-            
+            }           
             return 0;
         }
 
